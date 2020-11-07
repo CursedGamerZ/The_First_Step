@@ -10,5 +10,6 @@
     ],
     "subscribers": [
        "src/subscriber/**/*.ts"
-    ]
+    ],
+    "logging": true
  }
