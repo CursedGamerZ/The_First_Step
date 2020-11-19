@@ -1,30 +1,30 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 
 @Entity()
 export class Posts {
-    @Column()
-    catagory! : string;
+  @Column()
+  catagory!: string;
 
-    @PrimaryGeneratedColumn()
-    id!:number;
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-    @Column()
-    author! : string;
+  @Column()
+  author!: string;
 
-    @Column()
-    title!: string;
-    
-    @Column()
-    content!: string;
+  @Column()
+  title!: string;
 
-    @CreateDateColumn()
-    date! : string
+  @Column()
+  content!: string;
+
+  @CreateDateColumn()
+  date!: string;
 }
 
 export class Accounts {
-    @Column()
-    name! : string;
+  @Column()
+  name!: string;
 
-    @Column()
-    password! :string;
+  @Column()
+  password!: string;
 }
