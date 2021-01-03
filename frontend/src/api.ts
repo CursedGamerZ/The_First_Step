@@ -1,13 +1,13 @@
-export interface IPosts {
+export interface IPost {
   catagory: String;
-  id: number;
+  id?: number;
   author: string;
   title: string;
   content: string;
   date: string;
 }
 
-export async function GetPosts(): Promise<IPosts[] | undefined> {
+export async function GetPosts(): Promise<IPost[] | undefined> {
   const resp = await fetch("/posts");
   if (resp.ok) {
     if (resp.status === 200) {
@@ -17,7 +17,7 @@ export async function GetPosts(): Promise<IPosts[] | undefined> {
   }
 }
 
-export async function AddPosts(ps: IPosts): Promise<IPosts | undefined> {
+export async function AddPosts(ps: IPost): Promise<IPost | undefined> {
   const resp = await fetch("/posts", {
     method: "POST",
     headers: {
@@ -37,7 +37,7 @@ export async function DeletePosts(id: number): Promise<boolean> {
   return resp.ok;
 }
 
-export async function UpdatePosts(ps: IPosts) {
+export async function UpdatePosts(ps: IPost) {
   const resp = await fetch(`/posts/${ps.id}`, {
     method: "PATCH",
     headers: {

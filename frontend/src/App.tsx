@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useContext, useState} from 'react';
 import './App.css';
+import PostProvider from './PostsContext';
+import { IPost }from "./api"
+import UpdateModal from "./UpdateModal";
 
 function App() {
+
+  const ctx = useContext (PostProvider);
+
+  const [updatePosts, setUpdatePosts] = useState<IPost>();
+
+  const ok = ctx?.AddTodo(ps);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+
     </div>
-  );
-}
+  )
+};
 
 export default App;

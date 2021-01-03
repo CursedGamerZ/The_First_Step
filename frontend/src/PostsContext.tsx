@@ -1,18 +1,18 @@
 import React, { createContext, useEffect, useState } from "react";
-import { AddPosts, DeletePosts, GetPosts, IPosts, UpdatePosts } from "./api";
+import { AddPosts, DeletePosts, GetPosts, IPost, UpdatePosts } from "./api";
 
 
-interface IPostsContext {
-    posts: IPosts[];
-    AddPosts: (ps:IPosts) => Promise<boolean>;
+interface IPostContext {
+    posts: IPost[];
+    AddPosts: (ps:IPost) => Promise<boolean>;
     DeletePosts: (ps: number) => Promise<boolean>;
-    updatePosts: (ps: IPosts) => Promise<boolean>; 
+    updatePosts: (ps: IPost) => Promise<boolean>; 
 }
 
-export const PostsContext = createContext<IPostsContext | null>(null);
+export const PostContext = createContext<IPostContext | null>(null);
 
-const PostsProvider = (props:any) => {
-    const [posts, setPosts] = useState<IPosts[]>([]);
+const PostProvider = (props:any) => {
+    const [posts, setPosts] = useState<IPost[]>([]);
 
     useEffect(() =>{
         const fetchPosts = async () =>{
@@ -26,7 +26,7 @@ const PostsProvider = (props:any) => {
 
 
 
-    const addPosts = async (ps:IPosts): Promise<boolean> => {
+    const addPosts = async (ps:IPost): Promise<boolean> => {
         const ok = await AddPosts(ps);
         if (!ok) {
             return false;
@@ -48,7 +48,7 @@ const PostsProvider = (props:any) => {
 
 
 
-      const updatePosts = async (td: IPosts): Promise<boolean> => {
+      const updatePosts = async (td: IPost): Promise<boolean> => {
         if (!td.id) {
           return false;
         }
@@ -69,7 +69,7 @@ const PostsProvider = (props:any) => {
 
 
     return (
-        <PostsContext.Provider
+        <PostContext.Provider
             value={{
                 Posts: posts,
                 AddPosts: addPosts,
@@ -81,4 +81,4 @@ const PostsProvider = (props:any) => {
     );
 };
 
-export default PostsProvider;
+export default PostProvider;
