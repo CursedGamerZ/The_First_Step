@@ -1,21 +1,36 @@
-import React, {useContext, useState} from 'react';
-import './App.css';
-import PostProvider from './PostsContext';
-import { IPost }from "./api"
-import UpdateModal from "./UpdateModal";
+import React, { useContext, useEffect, useState } from "react";
+import "./App.css";
+import { PostContext } from "./PostsContext";
+import { IPost } from "./api";
+
 
 function App() {
+  const ctx = useContext(PostContext);
 
-  const ctx = useContext (PostProvider);
+  const [posts, setPosts] = useState<IPost[]>([]);
 
-  const [updatePosts, setUpdatePosts] = useState<IPost>();
+  useEffect(() => {
+    let temp: IPost[] = [];
+    Array.from(Array(10).keys()).forEach((i) => {
+      const p = {
+        author: "User",
+        catagory: "Test",
+        content: "Test",
+        date: new Date().toUTCString(),
+        title: `Title ${i + 1}`,
+      };
+      temp.push(p);
+    });
+    setPosts(temp);
+  }, []);
 
-  const ok = ctx?.AddTodo(ps);
   return (
     <div>
-
+      {posts.map((p) => {
+        return <div>{p.title}</div>;
+      })}
     </div>
-  )
-};
+  );
+}
 
 export default App;
